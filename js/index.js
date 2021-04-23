@@ -2,9 +2,75 @@ const nodders = document.getElementById('nodders');
 const clock = document.getElementById('clock');
 const date = document.getElementById('date');
 
-let showSeconds = false;
+const months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Sep', 'Nov', 'Dec' ];
 
-const onFlip = () => {
+let showSeconds = false;
+let showMonth = false;
+
+// Clock and Date
+
+const setTime = () => {
+	const d = new Date();
+	const hours = setBetterTime(d.getHours());
+	const minutes = setBetterTime(d.getMinutes());
+	let time = `${hours}:${minutes}`;
+	if (showSeconds) {
+		time += `:${setBetterTime(d.getSeconds())}`;
+	}
+	clock.innerHTML = time;
+};
+
+const setDateAndTime = () => {
+	setTime();
+	setDate();
+};
+
+const setDate = () => {
+	const d = new Date();
+	const day = d.getDate();
+	const year = d.getFullYear();
+	const month = d.getMonth();
+	const monthShow = showMonth ? months[month] : month + 1;
+	const todayDate = `${day}/${monthShow}/${year}`;
+	date.innerHTML = todayDate;
+};
+
+const setBetterTime = (time) => (time < 10 ? '0' + time : time);
+
+// Modifiers
+
+const onShowSeconds = () => {
+	showSeconds = !showSeconds;
+};
+
+const onShowMonth = () => {
+	showMonth = !showMonth;
+};
+
+// Image functions
+
+const lightTheText = () => {
+	if (!clock.classList.contains('shine')) {
+		clock.classList.add('shine');
+		date.classList.add('shine');
+	} else {
+		clock.classList.remove('shine');
+		date.classList.remove('shine');
+	}
+};
+
+const booba = () => {
+	const d = new Date();
+	const hasBooba = clock.classList.contains('booba');
+	if (d.getHours() === d.getMinutes() && !hasBooba) {
+		clock.classList.add('booba');
+	}
+	if (d.getHours() !== d.getMinutes() && hasBooba) {
+		clock.classList.remove('booba');
+	}
+};
+
+const flip = () => {
 	if (nodders.classList.contains('flip')) {
 		nodders.classList.remove('flip');
 	} else {
@@ -12,29 +78,6 @@ const onFlip = () => {
 	}
 };
 
-const setDateAndTime = () => {
-	const d = new Date();
-	const hours = setBetterTime(d.getHours());
-	const minutes = setBetterTime(d.getMinutes());
-	let time = `${hours}:${minutes}`;
-	const todayDate = `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-	if (showSeconds) {
-		time += `:${setBetterTime(d.getSeconds())}`;
-	}
-	clock.innerHTML = time;
-	date.innerHTML = todayDate;
-};
-
-const onShowSeconds = () => {
-	showSeconds = !showSeconds;
-	if (showSeconds) {
-		clock.classList.add('seconds');
-	} else {
-		clock.classList.remove('seconds');
-	}
-};
-
-const setBetterTime = (time) => (time < 10 ? '0' + time : time);
-
-setInterval(onFlip, 1000);
-setInterval(setDateAndTime, 1);
+setInterval(booba, 500);
+setInterval(flip, 1000);
+setInterval(setDateAndTime, 100);

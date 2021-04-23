@@ -1,6 +1,6 @@
 @font-face {
-	font-family: 'Bangers-Regular';
-	src: url('../fonts/Bangers-Regular.ttf');
+	font-family: 'Mulish';
+	src: url('../fonts/Mulish/Mulish-VariableFont_wght.ttf');
 }
 
 :root {
@@ -25,7 +25,8 @@
 
 .text {
 	color: var(--text-color);
-	font-family: 'Bangers-Regular';
+	font-family: 'Mulish';
+	font-weight: bold;
 	user-select: none;
 	position: relative;
 }
@@ -44,21 +45,21 @@
 
 .booba::before,
 .booba::after {
+	--size: 112px;
 	content: url('../img/booba.png');
 	position: absolute;
+	top: 18px;
 }
 
 .booba::before {
-	top: 0;
-	left: -120px;
+	left: -130px;
 }
 
 .booba::after {
-	top: 0;
-	right: -120px;
+	right: -130px;
 	transform: scaleX(-1);
 }
 
-.seconds {
-	width: 225px;
+.shine {
+	text-shadow: 0px 0px 10px #00e5b0;
 }
