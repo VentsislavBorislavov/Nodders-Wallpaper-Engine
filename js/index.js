@@ -28,8 +28,6 @@ const setDate = (d) => {
 	date.innerHTML = todayDate;
 };
 
-const setBetterTime = (time) => (time < 10 ? '0' + time : time);
-
 // Modifiers
 
 const onShowSeconds = () => {
@@ -39,6 +37,8 @@ const onShowSeconds = () => {
 const onShowMonth = () => {
 	showMonth = !showMonth;
 };
+
+const setBetterTime = (time) => (time < 10 ? '0' + time : time);
 
 // Image functions
 
@@ -52,7 +52,7 @@ const lightTheText = () => {
 	}
 };
 
-const booba = (d) => {
+const boobaAnimations = (d) => {
 	const hasBooba = clock.classList.contains('booba-incoming');
 	if (d.getHours() === d.getMinutes() && !hasBooba) {
 		clock.classList.remove('booba-gone');
@@ -72,11 +72,13 @@ const flip = () => {
 	}
 };
 
+// update funtion
+
 const update = () => {
 	const d = new Date();
 	setTime(d);
 	setDate(d);
-	booba(d);
+	boobaAnimations(d);
 };
 
 setInterval(flip, 1000);
