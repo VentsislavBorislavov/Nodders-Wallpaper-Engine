@@ -9,8 +9,7 @@ let showMonth = false;
 
 // Clock and Date
 
-const setTime = () => {
-	const d = new Date();
+const setTime = (d) => {
 	const hours = setBetterTime(d.getHours());
 	const minutes = setBetterTime(d.getMinutes());
 	let time = `${hours}:${minutes}`;
@@ -20,13 +19,7 @@ const setTime = () => {
 	clock.innerHTML = time;
 };
 
-const setDateAndTime = () => {
-	setTime();
-	setDate();
-};
-
-const setDate = () => {
-	const d = new Date();
+const setDate = (d) => {
 	const day = d.getDate();
 	const year = d.getFullYear();
 	const month = d.getMonth();
@@ -59,14 +52,15 @@ const lightTheText = () => {
 	}
 };
 
-const booba = () => {
-	const d = new Date();
-	const hasBooba = clock.classList.contains('booba');
+const booba = (d) => {
+	const hasBooba = clock.classList.contains('booba-incoming');
 	if (d.getHours() === d.getMinutes() && !hasBooba) {
-		clock.classList.add('booba');
+		clock.classList.remove('booba-gone');
+		clock.classList.add('booba-incoming');
 	}
 	if (d.getHours() !== d.getMinutes() && hasBooba) {
-		clock.classList.remove('booba');
+		clock.classList.remove('booba-incoming');
+		clock.classList.add('booba-gone');
 	}
 };
 
@@ -78,6 +72,12 @@ const flip = () => {
 	}
 };
 
-setInterval(booba, 500);
+const update = () => {
+	const d = new Date();
+	setTime(d);
+	setDate(d);
+	booba(d);
+};
+
 setInterval(flip, 1000);
-setInterval(setDateAndTime, 100);
+setInterval(update, 100);
